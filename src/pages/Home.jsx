@@ -93,6 +93,18 @@ const CONFIG = {
       { key: "voucher", label: "Potongan biaya pendaftaran" },
       { key: "konsultasi", label: "Konsultasi via WhatsApp" },
     ],
+    sekolahList: [
+      "SMA Pasundan 1 Bandung",
+      "SMA Pasundan 3 Bandung",
+      "SMA Pasundan 2 Bandung",
+      "SMA Pasundan 8 Bandung",
+      "SMK Pasundan 1 Bandung",
+      "SMK Pasundan 3 Bandung",
+      "SMA Pasundan 1 Cimahi",
+      "SMA Pasundan Banjaran",
+      "SMK Pasundan 2 Bandung",
+      "SMA Pasundan Majalaya",
+    ],
   },
 };
 
@@ -548,23 +560,29 @@ export default function MiniLandingPageQRBukuTamuUNPAS() {
 
                 <Field
                   label="Asal sekolah"
-                  // hint={tags.school ? "Auto dari QR" : "Wajib"}
                   error={errors.sekolah}
                   id="sekolah"
                 >
-                  <input
+                  <select
                     id="sekolah"
                     name="sekolah"
                     value={form.sekolah}
                     onChange={(e) => setField("sekolah", e.target.value)}
-                    placeholder="Contoh: SMA Pasundan 1"
+                    disabled={Boolean(tags.school)}
                     className={cn(
                       "w-full rounded-2xl border px-4 py-3 text-sm outline-none",
                       errors.sekolah ? "border-red-300" : "border-neutral-200 focus:border-neutral-900",
                       tags.school ? "bg-neutral-50" : "bg-white"
                     )}
-                    readOnly={Boolean(tags.school)}
-                  />
+                  >
+                    <option value="">-- Pilih asal sekolah --</option>
+
+                    {CONFIG.options.sekolahList.map((s) => (
+                      <option key={s} value={s}>
+                        {s}
+                      </option>
+                    ))}
+                  </select>
                 </Field>
 
                 <div className="space-y-5">
